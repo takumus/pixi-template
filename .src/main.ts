@@ -1,8 +1,9 @@
-import * as main from './main';
+import Main from '../src/main';
 let renderer:PIXI.WebGLRenderer|PIXI.CanvasRenderer;
 const stage:PIXI.Container = new PIXI.Container();
 let canvas:HTMLCanvasElement;
 let stageWidth:number = 0, stageHeight:number = 0;
+const main = new Main();
 const init = ()=> {
 	renderer = PIXI.autoDetectRenderer(800, 800, {antialias: true, resolution:2, transparent:true});
 	canvas = <HTMLCanvasElement>document.getElementById("content");
@@ -14,7 +15,7 @@ const init = ()=> {
 	window.addEventListener('mousedown', mousedown);
 	window.addEventListener('mouseup', mouseup);
 	window.addEventListener('mousemove', mousemove);
-	main.init(stage);
+	stage.addChild(main);
 	draw();
 	resize();
 }
@@ -34,7 +35,7 @@ const mouseup = (e: MouseEvent) => {
 }
 const draw = ()=> {
 	requestAnimationFrame(draw);
-	main.update();
+	main.draw();
 	TWEEN.update();
 	renderer.render(stage);
 }

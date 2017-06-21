@@ -45,11 +45,12 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var main = __webpack_require__(1);
+	var main_1 = __webpack_require__(1);
 	var renderer;
 	var stage = new PIXI.Container();
 	var canvas;
 	var stageWidth = 0, stageHeight = 0;
+	var main = new main_1.default();
 	var init = function () {
 	    renderer = PIXI.autoDetectRenderer(800, 800, { antialias: true, resolution: 2, transparent: true });
 	    canvas = document.getElementById("content");
@@ -61,7 +62,7 @@
 	    window.addEventListener('mousedown', mousedown);
 	    window.addEventListener('mouseup', mouseup);
 	    window.addEventListener('mousemove', mousemove);
-	    main.init(stage);
+	    stage.addChild(main);
 	    draw();
 	    resize();
 	};
@@ -81,7 +82,7 @@
 	};
 	var draw = function () {
 	    requestAnimationFrame(draw);
-	    main.update();
+	    main.draw();
 	    TWEEN.update();
 	    renderer.render(stage);
 	};
@@ -100,36 +101,79 @@
 
 /***/ },
 /* 1 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var canvas_1 = __webpack_require__(2);
+	var Main = (function (_super) {
+	    __extends(Main, _super);
+	    function Main() {
+	        return _super !== null && _super.apply(this, arguments) || this;
+	    }
+	    Main.prototype.init = function () {
+	    };
+	    Main.prototype.draw = function () {
+	    };
+	    Main.prototype.mousedown = function () {
+	    };
+	    Main.prototype.mouseup = function () {
+	    };
+	    Main.prototype.mousemove = function () {
+	        this.canvas.clear();
+	        this.canvas.beginFill(0xff0000);
+	        this.canvas.drawRect(this.mouse.x - 50, this.mouse.y - 50, 100, 100);
+	    };
+	    Main.prototype.resize = function (width, height) {
+	    };
+	    return Main;
+	}(canvas_1.default));
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = Main;
+
+
+/***/ },
+/* 2 */
 /***/ function(module, exports) {
 
 	"use strict";
-	exports.mouse = { x: 0, y: 0 };
-	exports.size = { width: 0, height: 0 };
-	exports.container = new PIXI.Container();
-	exports.canvas = new PIXI.Graphics();
-	function init(stage) {
-	    stage.addChild(exports.container);
-	    exports.container.addChild(exports.canvas);
-	}
-	exports.init = init;
-	function update() {
-	}
-	exports.update = update;
-	function mousedown() {
-	}
-	exports.mousedown = mousedown;
-	function mouseup() {
-	}
-	exports.mouseup = mouseup;
-	function mousemove() {
-	    exports.canvas.clear();
-	    exports.canvas.beginFill(0xff0000);
-	    exports.canvas.drawRect(exports.mouse.x - 50, exports.mouse.y - 50, 100, 100);
-	}
-	exports.mousemove = mousemove;
-	function resize(width, height) {
-	}
-	exports.resize = resize;
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var Canvas = (function (_super) {
+	    __extends(Canvas, _super);
+	    function Canvas() {
+	        var _this = _super.call(this) || this;
+	        _this.mousePressed = false;
+	        _this.mouse = { x: 0, y: 0 };
+	        _this.size = { width: 0, height: 0 };
+	        _this.canvas = new PIXI.Graphics();
+	        _this.addChild(_this.canvas);
+	        _this.init();
+	        return _this;
+	    }
+	    Canvas.prototype.init = function () {
+	    };
+	    Canvas.prototype.draw = function () {
+	    };
+	    Canvas.prototype.mousedown = function () {
+	    };
+	    Canvas.prototype.mouseup = function () {
+	    };
+	    Canvas.prototype.mousemove = function () {
+	    };
+	    Canvas.prototype.resize = function (width, height) {
+	    };
+	    return Canvas;
+	}(PIXI.Container));
+	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.default = Canvas;
 
 
 /***/ }
