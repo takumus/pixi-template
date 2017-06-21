@@ -9,6 +9,5 @@ cp $FROM_DIR/gulpfile.js $TO_DIR
 cp $FROM_DIR/package.json $TO_DIR
 cp $FROM_DIR/tsconfig.json $TO_DIR
 cp $FROM_DIR/webpack.config.js $TO_DIR
-echo '7 files copied'
-echo 'npm install'
+echo 'files copied'
 npm install
